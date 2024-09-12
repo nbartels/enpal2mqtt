@@ -1,0 +1,20 @@
+# MQTT broker related config
+[mqtt]
+host = 127.0.0.1
+port = 1883
+login = mqttlogin
+password = mqttpassword
+
+# root of the used topics
+roottopic = enpal
+
+# enpal home influxdb config
+[enpal]
+url = http://enpal:8086
+org = enpal
+token = enpalhometoken
+refresh = 60 # refresh interval in secs
+
+[log]
+verbose = false
+logfile = /tmp/vlx2mqtt.log
