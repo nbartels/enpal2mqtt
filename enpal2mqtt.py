@@ -62,7 +62,7 @@ else:
 
 # MQTT-Client erstellen
 MQTT_CLIENT_ID = APPNAME + "_%d" % os.getpid()
-mqtt_client = mqtt.Client(MQTT_CLIENT_ID)
+mqtt_client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION1, MQTT_CLIENT_ID)
 
 def get_tables():
     client = InfluxDBClient(url=ENPAL_URL, token=ENPAL_TOKEN, org=ENPAL_ORG)
