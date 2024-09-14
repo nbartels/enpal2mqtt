@@ -62,7 +62,7 @@ else:
 
 # MQTT-Client erstellen
 MQTT_CLIENT_ID = APPNAME + "_%d" % os.getpid()
-mqtt_client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION1, MQTT_CLIENT_ID)
+mqtt_client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2, MQTT_CLIENT_ID)
 
 def get_tables():
     client = InfluxDBClient(url=ENPAL_URL, token=ENPAL_TOKEN, org=ENPAL_ORG)
@@ -72,12 +72,12 @@ def get_tables():
       |> range(start: -5m) \
       |> last()'
     
-    logging.debug("Fetching data from Enpal Home")
+    logging.info("Fetching data from Enpal Home")
 
     tables = query_api.query(query)
     client.close()
 
-    logging.debug("Fetched %s datasets" % len(tables))
+    logging.info("Fetched %s datasets" % len(tables))
 
     return tables
 
@@ -109,14 +109,14 @@ def convert_values(measurement, field, value):
     data_line["value"] = round(float(value), 2) if (is_number(float)) else value
     return data_line
 
-logging.debug("Enpal Url   : %s" % ENPAL_URL)
-logging.debug("Enpal Org   : %s" % ENPAL_ORG)
-logging.debug("MQTT broker : %s" % MQTT_HOST)
+logging.info("Enpal Url   : %s" % ENPAL_URL)
+logging.info("Enpal Org   : %s" % ENPAL_ORG)
+logging.info("MQTT broker : %s" % MQTT_HOST)
 if MQTT_LOGIN:
-    logging.debug("  port      : %s" % (str(MQTT_PORT)))
-    logging.debug("  login     : %s" % MQTT_LOGIN)
-logging.debug("roottopic   : %s" % ROOT_TOPIC)
-logging.debug("Interval   : %s" % INTERVAL)
+    logging.info("  port      : %s" % (str(MQTT_PORT)))
+    logging.info("  login     : %s" % MQTT_LOGIN)
+logging.info("roottopic   : %s" % ROOT_TOPIC)
+logging.info("Interval   : %s" % INTERVAL)
 
 
 
