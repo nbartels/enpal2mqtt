@@ -85,17 +85,18 @@ def send_data_to_mqtt(data):
     mqtt_client.connect(MQTT_HOST, MQTT_PORT, 60)
     mqtt_client.loop_start()
     
-    # MQTT-Nachricht senden
-    mqtt_client.publish(ROOT_TOPIC + "/" + data[f'category'] + "/" + data[f'field'].replace('.', '_'), data[f'value'])
+    for data_item in data:
+        # MQTT-Nachricht senden
+        mqtt_client.publish(ROOT_TOPIC + "/" + data_item["category"] + "/" + data_item["field"].replace('.', '_'), data_item["value"])
     
     mqtt_client.loop_stop()
     mqtt_client.disconnect()
 
 def convert_values(measurement, field, value):
     data_line = {}
-    data_line[f'category'] = measurement
-    data_line[f'field'] = field
-    data_line[f'value'] = round(float(value), 2) if (is_number(float)) else value
+    data_line["category"] = measurement
+    data_line["field"] = field
+    data_line["value"] = round(float(value), 2) if (is_number(float)) else value
     return data_line
 
 logging.debug("Enpal Url   : %s" % ENPAL_URL)
@@ -117,6 +118,7 @@ try:
 
         # Daten verarbeiten
         for table in result:
+            
             field = table.records[0].values['_field']
             measurement = table.records[0].values['_measurement']
             value = table.records[0].values['_value']
