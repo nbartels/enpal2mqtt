@@ -95,7 +95,9 @@ def send_data_to_mqtt(data):
     
     for data_item in data:
         # MQTT-Nachricht senden
-        mqtt_client.publish(ROOT_TOPIC + "/" + data_item["category"] + "/" + data_item["field"].replace('.', '_'), data_item["value"])
+        topic = ROOT_TOPIC + "/" + data_item["category"] + "/" + data_item["field"].replace('.', '_')
+        mqtt_client.publish(topic , data_item["value"])
+        logging.debug("Sent data to topic %s" % topic)
     
     mqtt_client.loop_stop()
     mqtt_client.disconnect()
