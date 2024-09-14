@@ -28,8 +28,8 @@ MQTT_PASSWORD = config.get("mqtt", "password", fallback=None)
 ROOT_TOPIC = config.get("mqtt", "roottopic")
 
 # [enpal] - InfluxDB-Konfiguration
-ENPAL_URL = config.get("enpal", "host")
-ENPAL_ORG = config.get("enpal", "login", fallback="enpal")
+ENPAL_URL = config.get("enpal", "url")
+ENPAL_ORG = config.get("enpal", "org", fallback="enpal")
 ENPAL_TOKEN = config.get("enpal", "token")
 
 # [log]
