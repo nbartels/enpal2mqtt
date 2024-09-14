@@ -71,9 +71,14 @@ def get_tables():
     query = 'from(bucket: "solar") \
       |> range(start: -5m) \
       |> last()'
+    
+    logging.debug("Fetching data from Enpal Home")
 
     tables = query_api.query(query)
     client.close()
+
+    logging.debug("Fetched %s datasets" % len(tables))
+
     return tables
 
 def is_number(value):
@@ -84,6 +89,9 @@ def send_data_to_mqtt(data):
         mqtt_client.username_pw_set(MQTT_LOGIN, MQTT_PASSWORD)
     mqtt_client.connect(MQTT_HOST, MQTT_PORT, 60)
     mqtt_client.loop_start()
+
+    logging.info("Sending data to MQTT...")
+    logging.info("Sending %s datasets to MQTT" % len(data))
     
     for data_item in data:
         # MQTT-Nachricht senden
@@ -107,6 +115,7 @@ if MQTT_LOGIN:
     logging.debug("  login     : %s" % MQTT_LOGIN)
 logging.debug("roottopic   : %s" % ROOT_TOPIC)
 logging.debug("Interval   : %s" % INTERVAL)
+
 
 
 # Hauptschleife für den zyklischen Abruf und Versand
