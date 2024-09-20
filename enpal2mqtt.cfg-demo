@@ -13,7 +13,8 @@ roottopic = enpal
 url = http://enpal:8086
 org = enpal
 token = enpalhometoken
-refresh = 60 # refresh interval in secs
+# refresh interval in secs
+refresh = 60 
 
 [log]
 verbose = false
