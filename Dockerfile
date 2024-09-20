@@ -7,5 +7,4 @@ RUN pip install paho-mqtt influxdb-client
 
 RUN mkdir -p /certs
 
-CMD [ "python", "/enpal2stdout.py" ]
 CMD [ "python", "/enpal2mqtt.py", "/enpal2mqtt.cfg" ]
