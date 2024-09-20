@@ -116,7 +116,7 @@ if MQTT_LOGIN:
     logging.info("  port      : %s" % (str(MQTT_PORT)))
     logging.info("  login     : %s" % MQTT_LOGIN)
 logging.info("roottopic   : %s" % ROOT_TOPIC)
-logging.info("Interval   : %s" % INTERVAL)
+logging.info("Interval    : %s" % INTERVAL)
 
 
 
