@@ -37,7 +37,7 @@ VERBOSE = config.get("log", "verbose")
 LOGFILE = config.get("log", "logfile", fallback=None)
 
 # Intervall für den zyklischen Abruf (in Sekunden)
-INTERVAL = config.get("mqtt", "refresh", fallback=60)
+INTERVAL = config.get("enpal", "refresh", fallback=60)
 
 APPNAME = "enpal2mqtt"
 
